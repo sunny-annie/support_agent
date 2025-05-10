@@ -1,5 +1,4 @@
 import json
-# from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.docstore.document import Document
 from langchain_huggingface import HuggingFaceEmbeddings
