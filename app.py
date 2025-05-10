@@ -1,15 +1,15 @@
-from agent_conditions import agent
-# state = {"text": "Как вернуть товар?"}
-# state = {"text": "Заказ 563526 пришел поврежденный. Можно оформить возврат?"}
-# state = {"text": "не могу отменить заказ"}
-# state = {"text": "холодильник отлично работает, быстрая доставка. спасибо!"}
+import streamlit as st
+from agent_conditions import run_agent
 
-# state = {"text": "Как изменить адрес доставки?"}
-# state = {"text": "Какой срок гарантии на заказ 56352?"}
-# state = {"text": "йоу"}
-state = {"text": "безобразие!!! доставка опоздала на две недели!!!!"}
-result = agent.invoke(state)
-print(result)
-print(result["response"])
+st.set_page_config(page_title="🤖 AI-помощник службы поддержки")
+st.title("💬 AI-помощник службы поддержки")
 
-# python app.py
+with st.form("support_form"):
+    user_query = st.text_area("Введите вопрос или обращение:", height=200)
+    submitted = st.form_submit_button("Отправить")
+
+if submitted and user_query.strip():
+    with st.spinner("Обработка запроса..."):
+        response = run_agent(user_query)
+    st.markdown("### 📍 Ответ:")
+    st.success(response)
